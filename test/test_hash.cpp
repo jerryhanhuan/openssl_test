@@ -6,13 +6,15 @@
 #include <sys/stat.h>
 #include <stdarg.h>
 
+
+
 #include "hashInterface.h"
 #include "str.h"
 #include "smAPI.h"
 
 
-static char	pgUnionInputStr[8192+1];
-static int IsQuit(char *p)
+char	pgUnionInputStr[8192+1];
+int IsQuit(char *p)
 {
 	ToUpperCase(p);
 	if ((strcmp(p,"QUIT") == 0) || (strcmp(p,"EXIT") == 0))
@@ -23,7 +25,7 @@ static int IsQuit(char *p)
 
 
 
-static char *Input(char *fmt,...)
+char *Input(const char *fmt,...)
 {
 	va_list args;
 	int	i;
@@ -54,7 +56,7 @@ int test_hash()
 {
 	int ret = 0;
 	char *ptr = NULL;
-	ptr = Input("请选择Hash 算法:: 0-SHA1 1-SHA224 2-SHA256 3-SHA384 4-SHA512 5-MD5 ::");
+	ptr = Input("please select hash:: 0-SHA1 1-SHA224 2-SHA256 3-SHA384 4-SHA512 5-MD5 ::");
 	int hashID = atoi(ptr);
 	char dataHex[8192]={0};
 	unsigned char data[8192]={0};
@@ -63,7 +65,7 @@ int test_hash()
 	int len = 0;
 	char hashValHex[256]={0};
 
-	ptr = Input("请输入数据(H)::");
+	ptr = Input("please input data(H)::");
 	datalen = aschex_to_bcdhex(ptr,strlen(ptr),(char*)data);
 	if ((len = DigestWithOpenssl(hashID,data,datalen,hashval))<0)
 	{
@@ -81,7 +83,7 @@ int test_PBKDF2WithOpenssl()
 
 	int ret = 0;
 	char *ptr = NULL;
-	ptr = Input("请选择Hash 算法:: 0-SHA1 1-SHA224 2-SHA256 3-SHA384 4-SHA512 5-MD5 ::");
+	ptr = Input("please select hash:: 0-SHA1 1-SHA224 2-SHA256 3-SHA384 4-SHA512 5-MD5 ::");
 	int hashID = atoi(ptr);
 	unsigned char pass[1024]={0};
 	int iter = 0;
@@ -91,13 +93,13 @@ int test_PBKDF2WithOpenssl()
 	unsigned char key[1024]={0};
 	char keyHex[2018+1]={0};
 	
-	ptr = Input("请输入pass::");
+	ptr = Input("please input pass::");
 	strcpy((char*)pass,ptr);
-	ptr = Input("请输入Salt(H)::");
+	ptr = Input("please input Salt(H)::");
 	saltlen = aschex_to_bcdhex(ptr,strlen(ptr),(char*)salt);
-	ptr = Input("请输入迭代次数::");
+	ptr = Input("please input iter::");
 	iter = atoi(ptr);
-	ptr = Input("请输入需要生成的密钥长度::");
+	ptr = Input("please input keylen::");
 	keylen = atoi(ptr);
 	
 	if ((ret = PBKDF2WithOpenssl(hashID,pass,strlen((char*)pass),salt,saltlen,iter,keylen,key))<0)
@@ -135,9 +137,9 @@ int test_HMAC_SM3()
 	unsigned char mac[32]={0};
 	char macHex[65]={0};
 
-	ptr = Input("请输入key(H)::");
+	ptr = Input("please input key(H)::");
 	keylen = aschex_to_bcdhex(ptr,strlen(ptr),(char*)key);
-	ptr = Input("请输入data(H)::");
+	ptr = Input("please input data(H)::");
 	datalen = aschex_to_bcdhex(ptr,strlen(ptr),(char*)data);
 
 	if ((ret = SoftHMAC_SM3(key,keylen,data,datalen,mac))<0)
@@ -165,7 +167,7 @@ int test_HMAC()
 
 	int ret = 0;
 	char *ptr = NULL;
-	ptr = Input("请选择Hash 算法:: 0-SHA1 1-SHA224 2-SHA256 3-SHA384 4-SHA512 5-MD5 ::");
+	ptr = Input("please select hash:: 0-SHA1 1-SHA224 2-SHA256 3-SHA384 4-SHA512 5-MD5 ::");
 	int hashID = atoi(ptr);
 	char dataHex[8192]={0};
 	unsigned char data[8192]={0};
@@ -175,11 +177,11 @@ int test_HMAC()
 	char hashValHex[256]={0};
 	unsigned char key[1024]={0};
 	int keylen = 0;
-	ptr = Input("请输入key(H)::");
+	ptr = Input("please input key(H)::");
 	keylen = aschex_to_bcdhex(ptr,strlen(ptr),(char*)key);
 
 
-	ptr = Input("请输入数据(H)::");
+	ptr = Input("please input data(H)::");
 	datalen = aschex_to_bcdhex(ptr,strlen(ptr),(char*)data);
 	if ((len = HMACWithOpenssl(hashID,key,keylen,data,datalen,hashval))<0)
 	{
@@ -195,31 +197,32 @@ int test_HMAC()
 
 int main()
 {
+	int ret = 0;
 	char choice[128]={0};
 	loop:
 #ifdef WIN32
-	system("cls");
+	ret = system("cls");
 #else
-	system("clear");
+	ret = system("clear");
 #endif
 
 	
 	
-	printf("HASH 测试::\n");
+	printf("HASH test::\n");
 	printf("01		hash\n");
 	printf("02		PBKDF2\n");
 	printf("03		SM3\n");
 	printf("04		HMAC_SM3\n");
 	printf("05		HAMC\n");
-	printf("Exit	退出\n");
+	printf("Exit	exit\n");
 	printf("\n");
 
-	printf("请选择::");
+	printf("please select choice::");
 	
 #ifdef  WIN32
-	scanf("%s",choice);
+	ret = scanf("%s",choice);
 #else
-	scanf("%s",choice);
+	ret = scanf("%s",choice);
 #endif
 	
 	if ((strcmp(choice,"EXIT") == 0) || (strcmp("QUIT",choice) == 0))
@@ -247,7 +250,7 @@ int main()
 		break;
 	}
 
-	printf("请按回车键继续... ...");
+	printf("please enter... ...");
 	getchar();
 	getchar();
 	goto loop;
