@@ -18,7 +18,7 @@ $(libobj):
 	ar rv $(libobj) $(objs)
 	
 final:$(null)
-	mv *.o $(OBJDIR)
+	mv $(objs) $(OBJDIR)
 	mv $(libobj) $(OBJDIR)
 
 
