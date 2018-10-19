@@ -1,6 +1,3 @@
-all: objs\
-        libutil\
-        final
 
 OSSPEC = -m64
 CC = gcc
@@ -9,24 +6,23 @@ DEFINES = -O1 $(OSSPEC) $(INC)
 OBJDIR = ../../obj/
 
 
-objs:openssl_init.o str.o
+objs = openssl_init.o str.o
+libobj = libutil.a
 
-.SUFFIXES:.c.o
-.c.o:
-	$(CC) $(DEFINES) -c $*.c
+all:$(objs) $(libobj) final
 
-.SUFFIXES:.cpp.o
-.cpp.o:
-	$(CC) $(DEFINES) -c $*.cpp
+%.o:%.cpp
+	$(CC) $(DEFINES) -c $<
+%.o:%.cpp
+	$(CC) $(DEFINES) -c $<
 
-utilobj = openssl_init.o str.o
 
-libutil:$(utilobj)
-	ar rv libutil.a $(utilobj)
+$(libobj):$(objs)
+	ar rv $(libobj) $(objs)
 
 final:$(null)
-	mv *.o $(OBJDIR)
-	mv libutil.a $(OBJDIR)
+	mv $(objs) $(OBJDIR)
+	mv $(libobj) $(OBJDIR)
 
 
 
