@@ -1,32 +1,25 @@
-all: objs\
-        libhash\
-        final
-
 OSSPEC = -m64
 CC = gcc
 INC = -I ../../include
 DEFINES = -O1 $(OSSPEC) $(INC)
 OBJDIR = ../../obj/
 
+objs = hashInterface.o
+libobj = libhash.a
 
-objs:hashInterface.o
+all:$(objs) $(libobj) final
 
-.SUFFIXES:.c.o
-.c.o:
-	$(CC) $(DEFINES) -c $*.c
+%.o:%.cpp
+	$(CC) $(DEFINES) -c $<
+%.o:%.c
+	$(CC) $(DEFINES) -c $<
 
-.SUFFIXES:.cpp.o
-.cpp.o:
-	$(CC) $(DEFINES) -c $*.cpp
-
-hashobj = hashInterface.o
-
-libhash:$(hashobj)
-	ar rv libhash.a $(hashobj)
-
+$(libobj):
+	ar rv $(libobj) $(objs)
+	
 final:$(null)
 	mv *.o $(OBJDIR)
-	mv libhash.a $(OBJDIR)
+	mv $(libobj) $(OBJDIR)
 
 
 
