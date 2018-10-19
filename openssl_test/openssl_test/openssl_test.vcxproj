@@ -100,11 +100,15 @@
     <ClInclude Include="..\..\include\openssl\x509v3.h" />
     <ClInclude Include="..\..\include\openssl\x509_vfy.h" />
     <ClInclude Include="..\..\include\openssl_init.h" />
+    <ClInclude Include="..\..\include\smAPI.h" />
     <ClInclude Include="..\..\include\str.h" />
+    <ClInclude Include="..\..\src\sm\sm3.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\include\openssl\applink.c" />
     <ClCompile Include="..\..\src\hash\hashInterface.cpp" />
+    <ClCompile Include="..\..\src\sm\sm3.c" />
+    <ClCompile Include="..\..\src\sm\smAPI.cpp" />
     <ClCompile Include="..\..\src\utils\openssl_init.cpp" />
     <ClCompile Include="..\..\src\utils\str.cpp" />
     <ClCompile Include="..\..\test\test_hash.cpp" />

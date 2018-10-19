@@ -104,6 +104,17 @@ int ToUpperCase(char *str)
 
 
 
+void XorData(unsigned char *a, unsigned char *b, int len, unsigned char *out)
+{
+	int	i = 0;
 
+	for(i=0;i<len;i++)
+	{
+		*out = (*a)^(*b);
+		a++;
+		b++;
+		out++;
+	}
+}
 
 

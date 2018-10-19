@@ -12,7 +12,7 @@ extern "C" {
 
 	int ToUpperCase(char *str);
 
-
+	void XorData(unsigned char *a, unsigned char *b, int len, unsigned char *out);
 
 #ifdef __cplusplus
 }

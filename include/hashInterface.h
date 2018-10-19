@@ -76,6 +76,12 @@ int keylen, unsigned char *out);
 
 int PBKDF2WithOpenssl(int hashID,unsigned char *msg,int msglen,unsigned char *salt,int saltlen,int iter,int keylen,unsigned char *key);
 
+
+
+ int HMACWithOpenssl(int hashID,unsigned char *key,int keylen,unsigned char *data,int datalen,unsigned char *mac);
+
+
+
 #ifdef __cplusplus
 }
 #endif

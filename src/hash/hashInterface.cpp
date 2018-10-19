@@ -1,10 +1,12 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdint.h>
-#include <openssl/evp.h>
-#include <openssl/sha.h>
 #include <ctype.h>
 
+
+#include <openssl/evp.h>
+#include <openssl/sha.h>
+#include <openssl/hmac.h>
 
 #include "openssl_init.h"
 #include "hashInterface.h"
@@ -68,6 +70,7 @@ int DigestWithOpenssl(int hashID,unsigned char *data,int datalen,unsigned char *
 	 memcpy(digest,mdout,len);
 	 return len;
 }
+
 
 
 
@@ -143,5 +146,46 @@ int keylen, unsigned char *out);
 	 return keylen;
  }
 
+
+ int HMACWithOpenssl(int hashID,unsigned char *key,int keylen,unsigned char *data,int datalen,unsigned char *mac)
+ {
+
+	 int ret = 0;
+	 const EVP_MD      *md = NULL;
+	 unsigned char buf[256]={0};
+	 unsigned int len = 0;
+	 switch(hashID)
+	 {
+	 case H_SHA1:
+		 md = EVP_sha1();
+		 break;
+	 case H_SHA224:
+		 md = EVP_sha224();
+		 break;
+	 case H_SHA256:
+		 md = EVP_sha256();
+		 break;
+	 case H_SHA384:
+		 md = EVP_sha384();
+		 break;
+	 case H_SHA512:
+		 md = EVP_sha512();
+		 break;
+	 case H_MD5:
+		 md = EVP_md5();
+		 break;
+	 default:
+		 printf("in HMACWithOpenssl::not support hashID[%d]\n",hashID);
+		 return -1;
+	 }
+	 HMAC_CTX ctx;
+	 HMAC_CTX_init(&ctx);
+	 HMAC_Init(&ctx,key,keylen,md);
+	 HMAC_Update(&ctx,data,datalen);
+	 HMAC_Final(&ctx,buf,&len);
+	 HMAC_CTX_cleanup(&ctx);
+	 memcpy(mac,buf,len);
+	 return len;
+ }
 
 

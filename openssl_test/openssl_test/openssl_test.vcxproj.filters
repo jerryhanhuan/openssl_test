@@ -25,6 +25,9 @@
     <Filter Include="include\openssl">
       <UniqueIdentifier>{4a6a2df9-8df8-468b-b5a1-df19d92ba050}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\sm">
+      <UniqueIdentifier>{9f0ad6f8-2c69-4bd2-9c55-9ab3e9df4a23}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\openssl\aes.h">
@@ -273,6 +276,12 @@
     <ClInclude Include="..\..\include\str.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\sm\sm3.h">
+      <Filter>src\sm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\smAPI.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\include\openssl\applink.c">
@@ -289,6 +298,12 @@
     </ClCompile>
     <ClCompile Include="..\..\src\utils\str.cpp">
       <Filter>src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\sm\sm3.c">
+      <Filter>src\sm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\sm\smAPI.cpp">
+      <Filter>src\sm</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
