@@ -187,5 +187,3 @@ int keylen, unsigned char *out);
 	 memcpy(mac,buf,len);
 	 return len;
  }
-
-
