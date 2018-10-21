@@ -12,7 +12,8 @@ enum{
 	H_SHA256,
 	H_SHA384,
 	H_SHA512,
-	H_MD5
+	H_MD5,
+	H_MDC2
 };
 
 
