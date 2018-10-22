@@ -23,9 +23,14 @@ extern "C" {
 #ifndef OPENSSL_NO_KRB5
 # define OPENSSL_NO_KRB5
 #endif
+
+// modify in 2018.10.22 windows support md2
+
 #ifndef OPENSSL_NO_MD2
 # define OPENSSL_NO_MD2
 #endif
+
+
 #ifndef OPENSSL_NO_RC5
 # define OPENSSL_NO_RC5
 #endif
