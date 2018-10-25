@@ -4,7 +4,7 @@ INC = -I ../../include
 DEFINES = -O1 $(OSSPEC) $(INC)
 OBJDIR = ../../obj/
 
-objs = hashInterface.o
+objs = hashInterface.o sha3.o
 libobj = libhash.a
 
 all:$(objs) $(libobj) final

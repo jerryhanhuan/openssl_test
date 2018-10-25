@@ -13,21 +13,21 @@
 
 
 /*
-¹¦ÄÜ: ¼ÆËãhash
-ÊäÈë:
-	hashID: ÕªÒªËã·¨
+åŠŸèƒ½: è®¡ç®—hash
+è¾“å…¥:
+	hashID: æ‘˜è¦ç®—æ³•
 	00 : SHA-1
 	01 : SHA-224
 	02 : SHA-256
 	03 : SHA-384
 	04 : SHA-512
 	05:  MD5
-	data:´ıhash Êı¾İ
-	datalen: Êı¾İ³¤¶È
-	digest: hash Öµ
-·µ»Ø:
-	>0 hash Öµ×Ö½ÚÊı
-	<0 Ê§°Ü
+	data:å¾…hash æ•°æ®
+	datalen: æ•°æ®é•¿åº¦
+	digest: hash å€¼
+è¿”å›:
+	>0 hash å€¼å­—èŠ‚æ•°
+	<0 å¤±è´¥
 */
 
 int DigestWithOpenssl(int hashID,unsigned char *data,int datalen,unsigned char *digest)
@@ -79,9 +79,9 @@ int DigestWithOpenssl(int hashID,unsigned char *data,int datalen,unsigned char *
 
 
  /*
-¹¦ÄÜ: Ê¹ÓÃPBKDF2 ·½Ê½ÀëÉ¢ÃÜÔ¿ 
-ÊäÈë:
-	hashID: ÕªÒªËã·¨
+åŠŸèƒ½: ä½¿ç”¨PBKDF2 æ–¹å¼ç¦»æ•£å¯†é’¥ 
+è¾“å…¥:
+	hashID: æ‘˜è¦ç®—æ³•
 	00 : SHA-1
 	01 : SHA-224
 	02 : SHA-256
@@ -94,12 +94,12 @@ int DigestWithOpenssl(int hashID,unsigned char *data,int datalen,unsigned char *
 	saltlen: saltlen
 	iter: iter
 	keylen: length of the hash to generate
-Êä³ö:
-	key: ÀëÉ¢µÃµ½µÄkey
+è¾“å‡º:
+	key: ç¦»æ•£å¾—åˆ°çš„key
 
-·µ»Ø:
-	0 ³É¹¦
-	<0 Ê§°Ü
+è¿”å›:
+	0 æˆåŠŸ
+	<0 å¤±è´¥
 PKCS5_PBKDF2_HMAC() and PBKCS5_PBKDF2_HMAC_SHA1() return 1 on success or 0 on error.
 
 #include <openssl/evp.h>
@@ -192,3 +192,5 @@ int keylen, unsigned char *out);
 	 memcpy(mac,buf,len);
 	 return len;
  }
+
+

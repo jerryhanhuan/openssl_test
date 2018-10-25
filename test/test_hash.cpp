@@ -208,12 +208,13 @@ int main()
 
 	
 	
-	printf("HASH test::\n");
+	printf("alg test::\n");
 	printf("01		hash\n");
 	printf("02		PBKDF2\n");
 	printf("03		SM3\n");
 	printf("04		HMAC_SM3\n");
-	printf("05		HAMC\n");
+	printf("05		HMAC\n");
+	printf("06		OID transfer");
 	printf("Exit	exit\n");
 	printf("\n");
 
