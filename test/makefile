@@ -13,7 +13,7 @@ arlib = $(OBJDIR)libhash.a\
 LIB =  $(arlib) -L $(LIBDIR) -lcrypto
 
 test1_obj = test.o
-test1 = test_hash
+test1 = test
 
 all:$(test1) final
 
