@@ -56,9 +56,6 @@ int DigestWithOpenssl(int hashID,unsigned char *data,int datalen,unsigned char *
 	case H_MD5:
 		md = EVP_md5();
 		break;
-	case H_MDC2:
-		md = EVP_mdc2();
-		break;
 	default:
 		printf("not support hashID[%d]\n",hashID);
 		return -1;
