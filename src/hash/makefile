@@ -14,7 +14,7 @@ all:$(objs) $(libobj) final
 %.o:%.c
 	$(CC) $(DEFINES) -c $<
 
-$(libobj):
+$(libobj):$(objs)
 	ar rv $(libobj) $(objs)
 	
 final:$(null)

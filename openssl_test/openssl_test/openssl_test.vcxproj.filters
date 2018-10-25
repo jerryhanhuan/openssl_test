@@ -28,6 +28,9 @@
     <Filter Include="src\sm">
       <UniqueIdentifier>{9f0ad6f8-2c69-4bd2-9c55-9ab3e9df4a23}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\asn1">
+      <UniqueIdentifier>{eafa8f24-3983-4e33-88c7-e3f6667e6158}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\openssl\aes.h">
@@ -282,6 +285,12 @@
     <ClInclude Include="..\..\include\smAPI.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\asn1.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ecc.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\include\openssl\applink.c">
@@ -305,5 +314,25 @@
     <ClCompile Include="..\..\src\sm\smAPI.cpp">
       <Filter>src\sm</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\ecc\ecc.cpp">
+      <Filter>src\ecc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\asn1\asn1.cpp">
+      <Filter>src\asn1</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\src\ecc\makefile">
+      <Filter>src\ecc</Filter>
+    </None>
+    <None Include="..\..\src\asn1\makefile">
+      <Filter>src\asn1</Filter>
+    </None>
+    <None Include="..\..\src\hash\makefile">
+      <Filter>src\hash</Filter>
+    </None>
+    <None Include="..\..\test\makefile">
+      <Filter>test</Filter>
+    </None>
   </ItemGroup>
 </Project>

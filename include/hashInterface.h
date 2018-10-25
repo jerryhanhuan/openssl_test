@@ -20,21 +20,21 @@ enum{
 
 	
 /*
-功能: 计算hash
-输入:
-	hashID: 摘要算法
+鍔熻兘: 璁＄畻hash
+杈撳叆:
+	hashID: 鎽樿绠楁硶
 		00 : SHA-1
 		01 : SHA-224
 		02 : SHA-256
 		03 : SHA-384
 		04 : SHA-512
 		05:  MD5
-	data:待hash 数据
-	datalen: 数据长度
-	digest: hash 值
-返回:
-	>0 hash 值字节数
-	<0 失败
+	data:寰卙ash 鏁版嵁
+	datalen: 鏁版嵁闀垮害
+	digest: hash 缁撴灉
+杩斿洖:
+	>0 hash 鍊煎瓧鑺傛暟
+	<0 澶辫触
 */
 
 int DigestWithOpenssl(int hashID,unsigned char *data,int datalen,unsigned char *digest);
@@ -43,9 +43,9 @@ int DigestWithOpenssl(int hashID,unsigned char *data,int datalen,unsigned char *
 
 
 /*
-功能: 使用PBKDF2 方式离散密钥 
-输入:
-	hashID: 摘要算法
+鍔熻兘: 浣跨敤PBKDF2 鏂瑰紡绂绘暎瀵嗛挜 
+杈撳叆:
+	hashID: 鎽樿绠楁硶
 		00 : SHA-1
 		01 : SHA-224
 		02 : SHA-256
@@ -58,12 +58,12 @@ int DigestWithOpenssl(int hashID,unsigned char *data,int datalen,unsigned char *
 	saltlen: saltlen
 	iter: iter
 	keylen: length of the hash to generate
-输出:
-	key: 离散得到的key
+杈撳嚭:
+	key: 绂绘暎寰楀埌鐨刱ey
 
-返回:
-	0 成功
-	<0 失败
+杩斿洖:
+	0 鎴愬姛
+	<0 澶辫触
 PKCS5_PBKDF2_HMAC() and PBKCS5_PBKDF2_HMAC_SHA1() return 1 on success or 0 on error.
 
 #include <openssl/evp.h>

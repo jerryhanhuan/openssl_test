@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\asn1.h" />
+    <ClInclude Include="..\..\include\ecc.h" />
     <ClInclude Include="..\..\include\hashInterface.h" />
     <ClInclude Include="..\..\include\openssl\aes.h" />
     <ClInclude Include="..\..\include\openssl\asn1.h" />
@@ -106,12 +108,20 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\include\openssl\applink.c" />
+    <ClCompile Include="..\..\src\asn1\asn1.cpp" />
+    <ClCompile Include="..\..\src\ecc\ecc.cpp" />
     <ClCompile Include="..\..\src\hash\hashInterface.cpp" />
     <ClCompile Include="..\..\src\sm\sm3.c" />
     <ClCompile Include="..\..\src\sm\smAPI.cpp" />
     <ClCompile Include="..\..\src\utils\openssl_init.cpp" />
     <ClCompile Include="..\..\src\utils\str.cpp" />
     <ClCompile Include="..\..\test\test_hash.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\src\asn1\makefile" />
+    <None Include="..\..\src\ecc\makefile" />
+    <None Include="..\..\src\hash\makefile" />
+    <None Include="..\..\test\makefile" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{A2D29901-EA52-4944-B138-1AA527FDAC14}</ProjectGuid>

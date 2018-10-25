@@ -6,8 +6,8 @@ extern "C"{
 #endif
 
 /*
-	¹¦ÄÜ:¼ÓÔØOpenSSLµÄËã·¨,³ÌÐò³õÊ¼»¯Ê±µ÷ÓÃ
-	//¶àÏß³ÌÏÂ,×¢Òâ¼ÓËø
+	åŠŸèƒ½:åŠ è½½OpenSSLçš„ç®—æ³•,ç¨‹åºåˆå§‹åŒ–æ—¶è°ƒç”¨
+	//å¤šçº¿ç¨‹ä¸‹,æ³¨æ„åŠ é”
 */
 	
 void init_OpenSSL();
