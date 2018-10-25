@@ -1,6 +1,6 @@
 OSSPEC = -m64
 CC = gcc
-INC = -I ../../include
+INC = -I ../../include -I ./
 DEFINES = -O1 $(OSSPEC) $(INC)
 OBJDIR = ../../obj/
 
