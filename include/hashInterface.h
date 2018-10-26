@@ -13,9 +13,16 @@ enum{
 	H_SHA384,
 	H_SHA512,
 	H_MD5,
-	H_MDC2
+	H_MDC2,
+	H_SHA3_224,
+	H_SHA3_256,
+	H_SHA3_384,
+	H_SHA3_512,
+	H_KECCAK_224,
+	H_KECCAK_256,
+	H_KECCAK_384,
+	H_KECCAK_512
 };
-
 
 
 	
@@ -80,6 +87,17 @@ int PBKDF2WithOpenssl(int hashID,unsigned char *msg,int msglen,unsigned char *sa
 
 
  int HMACWithOpenssl(int hashID,unsigned char *key,int keylen,unsigned char *data,int datalen,unsigned char *mac);
+
+
+
+
+int SHA3(int hashID,unsigned char *in,int ilen,unsigned char *out);
+
+int keccak(int hashID,unsigned char *in,int ilen,unsigned char *out);
+
+
+
+
 
 
 

@@ -194,6 +194,96 @@ int test_HMAC()
 }
 
 
+int test_SHA3()
+{
+
+
+	int ret = 0;
+	int hashID = 0;
+	char *ptr = NULL;
+	ptr = Input("please select hash:: 0:SHA3-224 1:SHA3-256 2:SHA3-384 3:SHA3-512 ::");
+	ret = atoi(ptr);
+	switch(ret)
+	{
+		case 0:
+			hashID = H_SHA3_224;
+			break;
+		case 1:
+			hashID = H_SHA3_256;
+			break;
+		case 2:
+			hashID = H_SHA3_384;
+			break;
+		case 3:
+			hashID = H_SHA3_512;
+			break;
+		default:
+			printf("wrong choice\n");
+			return -1;
+	}
+
+	char dataHex[8192]={0};
+	unsigned char data[8192]={0};
+	int datalen = 0;
+	unsigned char hashval[128]={0};
+	int len = 0;
+	char hashValHex[256]={0};
+
+	ptr = Input("please input data(H)::");
+	datalen = aschex_to_bcdhex(ptr,strlen(ptr),(char*)data);
+
+	ret = SHA3(hashID,data,datalen,hashval);
+	bcdhex_to_aschex((char*)hashval,ret,hashValHex);
+	printf("hash::[%s]\n",hashValHex);
+	return 0;
+}
+
+
+int test_KECCAK()
+{
+
+
+	int ret = 0;
+	int hashID = 0;
+	char *ptr = NULL;
+	ptr = Input("please select hash:: 0:KECCAK-224 1:KECCAK-256 2:KECCAK-384 3:KECCAK-512 ::");
+	ret = atoi(ptr);
+	switch(ret)
+	{
+		case 0:
+			hashID = H_KECCAK_224;
+			break;
+		case 1:
+			hashID = H_KECCAK_256;
+			break;
+		case 2:
+			hashID = H_KECCAK_384;
+			break;
+		case 3:
+			hashID = H_KECCAK_512;
+			break;
+		default:
+			printf("wrong choice\n");
+			return -1;
+	}
+
+	char dataHex[8192]={0};
+	unsigned char data[8192]={0};
+	int datalen = 0;
+	unsigned char hashval[128]={0};
+	int len = 0;
+	char hashValHex[256]={0};
+
+	ptr = Input("please input data(H)::");
+	datalen = aschex_to_bcdhex(ptr,strlen(ptr),(char*)data);
+
+	ret = keccak(hashID,data,datalen,hashval);
+	bcdhex_to_aschex((char*)hashval,ret,hashValHex);
+	printf("hash::[%s]\n",hashValHex);
+	return 0;
+}
+
+
 
 int main()
 {
@@ -214,7 +304,8 @@ int main()
 	printf("03		SM3\n");
 	printf("04		HMAC_SM3\n");
 	printf("05		HMAC\n");
-	printf("06		OID transfer");
+	printf("06		SHA3\n");
+	printf("07		Keccak\n");
 	printf("Exit	exit\n");
 	printf("\n");
 
@@ -245,6 +336,12 @@ int main()
 		break;
 	case 5:
 		test_HMAC();
+		break;
+	case 6:
+		test_SHA3();
+		break;
+	case 7:
+		test_KECCAK();
 		break;
 	default:
 		printf("not support the choice\n");

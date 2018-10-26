@@ -10,6 +10,7 @@
 
 #include "openssl_init.h"
 #include "hashInterface.h"
+#include "sha3.h"
 
 
 /*
@@ -189,5 +190,63 @@ int keylen, unsigned char *out);
 	 memcpy(mac,buf,len);
 	 return len;
  }
+
+
+int SHA3(int hashID,unsigned char *in,int ilen,unsigned char *out)
+{
+
+	sha3_ctx_t sha3;
+	int hlen = 0;
+	switch(hashID)
+	{
+		case H_SHA3_224:
+			hlen = 224/8;
+			break;
+		case H_SHA3_256:
+			hlen = 256/8;
+			break;
+		case H_SHA3_384:
+			hlen = 384/8;
+			break;
+		case H_SHA3_512:
+			hlen = 512/8;
+			break;
+		default:
+			printf("not support hashID[%d]\n",hashID);
+			return -1;
+	}
+	 sha3_init(&sha3, hlen);
+	 sha3_update(&sha3, in, ilen);
+     sha3_final(out, &sha3);
+	 return hlen;
+}
+
+int keccak(int hashID,unsigned char *in,int ilen,unsigned char *out)
+{
+	sha3_ctx_t sha3;
+	int hlen = 0;
+	switch(hashID)
+	{
+		case H_KECCAK_224:
+			hlen = 224/8;
+			break;
+		case H_KECCAK_256:
+			hlen = 256/8;
+			break;
+		case H_KECCAK_384:
+			hlen = 384/8;
+			break;
+		case H_KECCAK_512:
+			hlen = 512/8;
+			break;
+		default:
+			printf("not support hashID[%d]\n",hashID);
+			return -1;
+	}
+	 sha3_init(&sha3, hlen);
+	 sha3_update(&sha3, in, ilen);
+     Keccak_final(out, &sha3);
+	 return hlen;
+}
 
 
