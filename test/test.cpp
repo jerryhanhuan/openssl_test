@@ -11,6 +11,7 @@
 #include "hashInterface.h"
 #include "str.h"
 #include "smAPI.h"
+#include "macro.h"
 
 
 char	pgUnionInputStr[8192+1];
@@ -283,6 +284,71 @@ int test_KECCAK()
 	return 0;
 }
 
+int test_sm4()
+{
+
+	int ret = 0;
+	char *ptr = NULL;
+	ptr = Input("Please select SM4 mode:: 1-ENC_ECB 2-DEC_ECB 3- ENC_CBC 4-DEC_CBC");
+	mode = atoi(ptr);
+	unsigned char key[16]={0};
+	char keyHex[33]={0};
+	unsigned char data[8192]={0};
+	char dataHex[8192]={0};
+	unsigned char out[8192]={0}；
+	char outHex[8192]={0};
+	int datalen = 0;
+
+	ptr = Input("Please input key(H)::");
+	strcpy(keyHex,ptr);
+	aschex_to_bcdhex(keyHex,strlen(keyHex),(char*)key);
+
+	ptr = Input("Please input data(H)::");
+	strcpy(dataHex,ptr);
+	datalen = aschex_to_bcdhex(dataHex,strlen(dataHex),(char*)data);
+
+	int algmode = 0;
+	char IVHex[33]={0};
+	unsigned char IV[16]={0};
+	int len = 0;
+
+	switch(mode)
+	{
+		case 1:
+			algmode = ENC_ECB;
+			ret = SoftSM4EncryptWithECB(key,data,datalen,out);
+			break;
+		case 2:
+			algmode = DEC_ECB;
+			ret = SoftSM4DecryptWithECB(key,data,dataleb,out);
+			break;
+		case 3:
+			algmode = ENC_CBC;
+			ptr = Input("Please input IV(H)::");
+			strcpy(IVHex,ptr);
+			aschex_to_bcdhex(IVHex,strlen(IVHex),(char*)IV);
+			ret = SoftSM4EncryptWithCBC(key,IV,data,datalen,out);
+			break;
+		case 4:
+			algmode = DEC_CBC;
+			ptr = Input("Please input IV(H)::");
+			strcpy(IVHex,ptr);
+			aschex_to_bcdhex(IVHex,strlen(IVHex),(char*)IV);
+			ret = SoftSM4DecryptWithCBC(key,IV,data,datalen,out);
+			break;
+		default:
+			printf("not support this mode\n");
+			return -1;
+	}
+	
+	bcdhex_to_aschex((char*)out,ret,outHex);
+	printf("out::%s\n",outHex);
+	return 0;
+}
+
+
+
+
 
 
 int main()
@@ -306,6 +372,7 @@ int main()
 	printf("05		HMAC\n");
 	printf("06		SHA3\n");
 	printf("07		Keccak\n");
+	printf("08		SM4\n");
 	printf("Exit	exit\n");
 	printf("\n");
 
@@ -342,6 +409,9 @@ int main()
 		break;
 	case 7:
 		test_KECCAK();
+		break;
+	case 8:
+		test_sm4();
 		break;
 	default:
 		printf("not support the choice\n");

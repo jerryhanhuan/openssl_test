@@ -25,11 +25,11 @@ outputSize: Integer   //the output size of the underlying hash function (e.g. 32
 
 //Keys longer than blockSize are shortened by hashing them
 if (length(key) > blockSize) then
-	key ¡û hash(key) //Key becomes outputSize bytes long
+	key â† hash(key) //Key becomes outputSize bytes long
 
 //Keys shorter than blockSize are padded to blockSize by padding with zeros on the right
 if (length(key) < blockSize) then
-	key ¡û Pad(key, blockSize) //pad key with zeros to make it blockSize bytes long
+	key â† Pad(key, blockSize) //pad key with zeros to make it blockSize bytes long
 
 o_key_pad = key xor [0x5c * blockSize]     //Outer padded key
 i_key_pad = key xor [0x36 * blockSize]    //Inner padded key

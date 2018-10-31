@@ -4,7 +4,7 @@ INC = -I ../../include -I ./
 DEFINES = $(OSSPEC) $(INC)
 OBJDIR = ../../obj/
 
-objs = sm3.o smAPI.o
+objs = sm3.o sm4.o smAPI.o
 
 libobj = libsma.a
 
