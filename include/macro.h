@@ -7,7 +7,7 @@ enum{
     DEC_ECB,
     ENC_CBC,
     DEC_CBC
-}
+};
 
 
 

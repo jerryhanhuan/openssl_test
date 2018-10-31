@@ -320,7 +320,7 @@ int test_sm4()
 			break;
 		case 2:
 			algmode = DEC_ECB;
-			ret = SoftSM4DecryptWithECB(key,data,dataleb,out);
+			ret = SoftSM4DecryptWithECB(key,data,datalen,out);
 			break;
 		case 3:
 			algmode = ENC_CBC;
