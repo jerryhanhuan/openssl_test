@@ -290,12 +290,12 @@ int test_sm4()
 	int ret = 0;
 	char *ptr = NULL;
 	ptr = Input("Please select SM4 mode:: 1-ENC_ECB 2-DEC_ECB 3- ENC_CBC 4-DEC_CBC");
-	mode = atoi(ptr);
+	int mode = atoi(ptr);
 	unsigned char key[16]={0};
 	char keyHex[33]={0};
 	unsigned char data[8192]={0};
 	char dataHex[8192]={0};
-	unsigned char out[8192]={0}；
+	unsigned char out[8192]={0};
 	char outHex[8192]={0};
 	int datalen = 0;
 
