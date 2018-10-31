@@ -291,6 +291,12 @@
     <ClInclude Include="..\..\include\ecc.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\sm\sm4.h">
+      <Filter>src\sm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hash\sha3.h">
+      <Filter>src\hash</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\include\openssl\applink.c">
@@ -301,9 +307,6 @@
     </ClCompile>
     <ClCompile Include="..\..\src\utils\openssl_init.cpp">
       <Filter>src\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\test\test_hash.cpp">
-      <Filter>test</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\utils\str.cpp">
       <Filter>src\utils</Filter>
@@ -320,6 +323,15 @@
     <ClCompile Include="..\..\src\asn1\asn1.cpp">
       <Filter>src\asn1</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\test\test.cpp">
+      <Filter>test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\sm\sm4.c">
+      <Filter>src\sm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hash\sha3.cpp">
+      <Filter>src\hash</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\src\ecc\makefile">
@@ -333,6 +345,9 @@
     </None>
     <None Include="..\..\test\makefile">
       <Filter>test</Filter>
+    </None>
+    <None Include="..\..\src\sm\makefile">
+      <Filter>src\sm</Filter>
     </None>
   </ItemGroup>
 </Project>

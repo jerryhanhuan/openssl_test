@@ -104,23 +104,28 @@
     <ClInclude Include="..\..\include\openssl_init.h" />
     <ClInclude Include="..\..\include\smAPI.h" />
     <ClInclude Include="..\..\include\str.h" />
+    <ClInclude Include="..\..\src\hash\sha3.h" />
     <ClInclude Include="..\..\src\sm\sm3.h" />
+    <ClInclude Include="..\..\src\sm\sm4.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\include\openssl\applink.c" />
     <ClCompile Include="..\..\src\asn1\asn1.cpp" />
     <ClCompile Include="..\..\src\ecc\ecc.cpp" />
     <ClCompile Include="..\..\src\hash\hashInterface.cpp" />
+    <ClCompile Include="..\..\src\hash\sha3.cpp" />
     <ClCompile Include="..\..\src\sm\sm3.c" />
+    <ClCompile Include="..\..\src\sm\sm4.c" />
     <ClCompile Include="..\..\src\sm\smAPI.cpp" />
     <ClCompile Include="..\..\src\utils\openssl_init.cpp" />
     <ClCompile Include="..\..\src\utils\str.cpp" />
-    <ClCompile Include="..\..\test\test_hash.cpp" />
+    <ClCompile Include="..\..\test\test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\src\asn1\makefile" />
     <None Include="..\..\src\ecc\makefile" />
     <None Include="..\..\src\hash\makefile" />
+    <None Include="..\..\src\sm\makefile" />
     <None Include="..\..\test\makefile" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

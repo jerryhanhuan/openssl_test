@@ -5,6 +5,73 @@
 #include "smAPI.h"
 #include "sm3.h"
 #include "str.h"
+#include "sm4.h"
+
+
+
+int SoftSM4EncryptWithECB(unsigned char *key,unsigned char *data,int datalen,unsigned char *out)
+{
+	int len = 0;
+	if(datalen%16)
+		len = (datalen/16+1)*16;
+	else
+		len = datalen;
+	unsigned char buf[8192]={0};
+	memcpy(buf,data,len);
+	sm4_context ctx;
+	sm4_setkey_enc(&ctx,key);
+	sm4_crypt_ecb(&ctx,len,buf,out);
+	return len;
+}
+
+int SoftSM4DecryptWithECB(unsigned char *key,unsigned char *data,int datalen,unsigned char *out)
+{
+	int len = 0;
+	if(datalen%16)
+		len = (datalen/16+1)*16;
+	else
+		len = datalen;
+	unsigned char buf[8192]={0};
+	memcpy(buf,data,len);
+	sm4_context ctx;
+	sm4_setkey_dec(&ctx,key);
+	sm4_crypt_ecb(&ctx,len,buf,out);
+	return len;
+}
+
+int SoftSM4EncryptWithCBC(unsigned char *key,unsigned char *iv,unsigned char *data,int datalen,unsigned char *out)
+{
+	int len = 0;
+	if(datalen%16)
+		len = (datalen/16+1)*16;
+	else
+		len = datalen;
+	unsigned char buf[8192]={0};
+	memcpy(buf,data,len);
+	sm4_context ctx;
+	sm4_setkey_enc(&ctx,key);
+	sm4_crypt_cbc(&ctx,SM4_ENCRYPT,len,iv,buf,out);
+	return len;
+}
+
+int SoftSM4DecryptWithCBC(unsigned char *key,unsigned char *iv,unsigned char *data,int datalen,unsigned char *out)
+{
+	int len = 0;
+	if(datalen%16)
+		len = (datalen/16+1)*16;
+	else
+		len = datalen;
+	unsigned char buf[8192]={0};
+	memcpy(buf,data,len);
+	sm4_context ctx;
+	sm4_setkey_dec(&ctx,key);
+	sm4_crypt_cbc(&ctx,SM4_DECRYPT,len,iv,buf,out);
+	return len;
+}
+
+
+
+
 
 
 int SoftSM3(unsigned char *input,int ilen,unsigned char *out)
@@ -25,11 +92,11 @@ outputSize: Integer   //the output size of the underlying hash function (e.g. 32
 
 //Keys longer than blockSize are shortened by hashing them
 if (length(key) > blockSize) then
-	key ← hash(key) //Key becomes outputSize bytes long
+	key <- hash(key) //Key becomes outputSize bytes long
 
 //Keys shorter than blockSize are padded to blockSize by padding with zeros on the right
 if (length(key) < blockSize) then
-	key ← Pad(key, blockSize) //pad key with zeros to make it blockSize bytes long
+	key <- Pad(key, blockSize) //pad key with zeros to make it blockSize bytes long
 
 o_key_pad = key xor [0x5c * blockSize]     //Outer padded key
 i_key_pad = key xor [0x36 * blockSize]    //Inner padded key
