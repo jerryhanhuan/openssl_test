@@ -16,7 +16,7 @@
 //生成RSA密钥
 int RSAGenDerKey(int bits,unsigned long  e,unsigned char *pk,int *pklen,unsigned char *vk,int *vklen)
 {
-    return GenRSADerKey(bits,e,pk,pklen,)vk,vklen;
+    return GenRSADerKey(bits,e,pk,pklen,vk,vklen);
 }
 
 

@@ -28,6 +28,5 @@
 
 
 #include "str.h"
-#include "asn1.h"
 #include "ecc.h"
 
