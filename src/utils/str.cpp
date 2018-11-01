@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <string.h>
-#include <errno.h>
 #include <stdlib.h>
-
-#ifndef WIN32
-	#include <unistd.h>
+#include <errno.h>
+#ifdef WIN32
+#include <io.h>
+#else
+#include <unistd.h>
 #endif
 
 #include "str.h"

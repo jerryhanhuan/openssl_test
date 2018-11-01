@@ -1,8 +1,12 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
+#include <stdlib.h>
 #include <errno.h>
-
+#ifdef WIN32
+#include <io.h>
+#else
+#include <unistd.h>
+#endif
 #include <openssl/asn1.h>
 #include <openssl/objects.h>
 #include <openssl/asn1t.h>
