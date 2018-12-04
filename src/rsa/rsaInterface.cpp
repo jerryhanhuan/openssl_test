@@ -2,6 +2,20 @@
 #include <string.h>
 #include <stdlib.h>
 #include <errno.h>
+
+#include <openssl/asn1.h>
+#include <openssl/asn1t.h>
+#include <openssl/crypto.h>
+#include <openssl/err.h>
+#include <openssl/bio.h>
+#include <openssl/x509.h>
+#include <openssl/rsa.h>
+#include <openssl/des.h>
+#include <openssl/evp.h>
+#include <openssl/pem.h>
+#include <openssl/conf.h>
+#include <openssl/pkcs12.h>
+
 #ifdef WIN32
 #include <io.h>
 #else
