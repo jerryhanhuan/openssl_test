@@ -99,6 +99,9 @@ int VKDec(unsigned char *vk,int vklen,unsigned char *cryptTxt,int cryptTxtLen,un
 返回:
 	>0 私钥密文的长度
 	<0 失败
+reference https://www.openssl.org/docs/man1.1.0/crypto/PEM_write_bio_PrivateKey.html
+	
+	
 */
 
 int EncryptDerVkBypassword(unsigned char *dervk,int vklen,char *passwd,char *vkbypasswd)
@@ -129,6 +132,10 @@ int EncryptDerVkBypassword(unsigned char *dervk,int vklen,char *passwd,char *vkb
 		printf("in UnionEncryptRSAVkeyByPwd BIO_new(BIO_s_mem) failed!\n");
 		return -2;
 	}
+	/*
+	if(!PEM_write_bio_PKCS8PrivateKey(pbio,pkey,EVP_des_ede3_cbc(),
+		passwd,strlen(passwd),0,NULL)) 
+	*/
 	if(!PEM_write_bio_PrivateKey(pbio,pkey,EVP_des_ede3_cbc(),
 		(unsigned char*)passwd,strlen(passwd),0,NULL)) 
 	{
