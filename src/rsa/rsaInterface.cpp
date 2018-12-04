@@ -25,6 +25,7 @@
 #include "str.h"
 #include "rsa.h"
 #include "rsaInterface.h"
+#include "openssl_init.h"
 
 
 //生成RSA密钥
@@ -108,6 +109,9 @@ int EncryptDerVkBypassword(unsigned char *dervk,int vklen,char *passwd,char *vkb
 	char		buf[8192+1]={0};
 	unsigned char *const_buf = NULL;
 	BIO *pbio = NULL;
+
+	init_OpenSSL();
+
 	pkey=EVP_PKEY_new();
 	const_buf = dervk;
 	inl = vklen ;
@@ -166,6 +170,9 @@ int DecryptPEMVk2Der(char *vkbypasswd,int vklen,char *passwd,unsigned char *derV
 	char buffer[4096]={0};
 	EVP_PKEY	*pKey = NULL;
 	int ret = 0;	
+
+	init_OpenSSL();
+
 	if ((vkbypasswd == NULL  || vklen <0 || passwd == NULL || derVK == NULL))
 	{
 		printf("in DecryptPEMVk2Der::para err .\n");

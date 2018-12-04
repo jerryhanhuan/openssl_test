@@ -433,7 +433,6 @@ int testASN1()
 
 int test_RSA_pwd()
 {
-
 	int ret = 0;
 	char password[128]={0};
 	unsigned char dervk[2048]={0};
