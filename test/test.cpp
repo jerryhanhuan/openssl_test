@@ -13,6 +13,7 @@
 #include "smAPI.h"
 #include "macro.h"
 #include "Asn1Interface.h"
+#include "rsaInterface.h"
 
 
 char	pgUnionInputStr[8192+1];
@@ -429,6 +430,41 @@ int testASN1()
 }
 
 
+int test_RSA_pwd()
+{
+
+	int ret = 0;
+	char password[128]={0};
+	unsigned char dervk[2048]={0};
+	char dervkHex[4096]={0};
+	char vkbypwdPEM[8192]={0};
+	char *ptr = NULL;
+	ptr = Input("请输入VK(H)::");
+	strcpy(dervkHex,ptr);
+	int vklen = aschex_to_bcdhex(dervkHex,strlen(dervkHex),(char*)dervk);
+	ptr = Input("请输入password::");
+	strcpy(password,ptr);
+
+	if((ret = EncryptDerVkBypassword(dervk,vklen,password,vkbypwdPEM))<0)
+	{
+		printf("EncryptDerVkBypassword failed \n");
+		return ret;
+	}
+	printf("私钥密文::\n");
+	printf("%s\n",vkbypwdPEM);
+	memset(dervk,0,sizeof(dervk));
+	if((vklen = DecryptPEMVk2Der(vkbypwdPEM,ret,password,dervk))<0)
+	{
+		printf("DecryptPEMVk2Der failed \n ");
+		return vklen;
+	}
+	memset(dervkHex,0,sizeof(dervkHex));
+	bcdhex_to_aschex((char*)dervk,vklen,dervkHex);
+	printf("vk::\n");
+	printf("%s\n",dervkHex);
+	return 0;
+}
+
 
 
 
@@ -456,6 +492,7 @@ int main()
 	printf("07		Keccak\n");
 	printf("08		SM4\n");
 	printf("09		ASN1\n");
+	printf("10		RSA2pemByPasswd\n");
 	printf("Exit	exit\n");
 	printf("\n");
 
@@ -498,6 +535,9 @@ int main()
 		break;
 	case 9:
 		testASN1();
+		break;
+	case 10:
+		test_RSA_pwd();
 		break;
 	default:
 		printf("not support the choice\n");

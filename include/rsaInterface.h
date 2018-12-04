@@ -66,7 +66,7 @@ int EncryptDerVkBypassword(unsigned char *dervk,int vklen,char *passwd,char *vkb
 	<0 失败
 */
 
-int DecryptPEMVk2Der(unsigned char *vkbypasswd,int vklen,char *passwd,unsigned char *derVK);
+int DecryptPEMVk2Der(char *vkbypasswd,int vklen,char *passwd,unsigned char *derVK);
 
 
 
