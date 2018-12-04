@@ -130,6 +130,7 @@ int EncryptDerVkBypassword(unsigned char *dervk,int vklen,char *passwd,char *vkb
 	{
 		BIO_free(pbio);
 		EVP_PKEY_free(pkey);
+		printf("PEM_write_bio_PrivateKey failed\n");
 		return -3;
 	}
 	ret = BIO_read(pbio,buf,sizeof(buf));
