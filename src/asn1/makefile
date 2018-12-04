@@ -4,7 +4,7 @@ INC = -I ./ -I ../../include
 DEFINES = -O1 $(OSSPEC) $(INC)
 OBJDIR = ../../obj/
 
-objs = asn1.o
+objs = asn1.o Asn1Interface.o
 libobj = libasn1.a
 
 all:$(objs) $(libobj) final

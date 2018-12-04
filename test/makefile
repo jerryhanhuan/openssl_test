@@ -8,7 +8,9 @@ OBJDIR = ../obj/
 
 arlib = $(OBJDIR)libhash.a\
 		$(OBJDIR)libutil.a\
-		$(OBJDIR)libsma.a
+		$(OBJDIR)libsma.a\
+                $(OBJDIR)libasn1.a\
+                $(OBJDIR)librsa.a
 
 LIB =  $(arlib) -L $(LIBDIR) -lcrypto
 

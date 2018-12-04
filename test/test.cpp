@@ -14,6 +14,7 @@
 #include "macro.h"
 #include "Asn1Interface.h"
 #include "rsaInterface.h"
+#include "Asn1Interface.h"
 
 
 char	pgUnionInputStr[8192+1];
