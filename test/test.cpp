@@ -12,6 +12,7 @@
 #include "str.h"
 #include "smAPI.h"
 #include "macro.h"
+#include "Asn1Interface.h"
 
 
 char	pgUnionInputStr[8192+1];
@@ -347,6 +348,87 @@ int test_sm4()
 }
 
 
+int testOID()
+{
+	int ret = 0;
+	char *ptr = NULL;
+	char oidHex[256]={0};
+	unsigned char oid[256]={0};
+	int oidlen = 0;
+	char oid_numerical[256]={0};
+	ptr = Input("please select :: 1-Oid2Hex 2-Hex2Oid::");
+	int choice = atoi(ptr);
+	switch(choice)
+	{
+		case 1:
+			ptr = Input("please input numerical OID::");
+			strcpy(oid_numerical,ptr);
+			ret = NumOid2Hex(oid_numerical,oid,&oidlen);
+			bcdhex_to_aschex((char*)oid,oidlen,oidHex);
+			printf("oidHex::%s\n",oidHex);
+			break;
+		case 2:
+			ptr = Input("please input OIDHex::");
+			strcpy(oidHex,ptr);
+			oidlen = aschex_to_bcdhex(oidHex,strlen(oidHex),(char*)oid);
+			ret = OidHex2Num(oid,oidlen,oid_numerical);
+			printf("oid numerical::%s\n",oid_numerical);
+			break;
+		default:
+			printf("not support choice[%d]\n",choice);
+			break;
+	}
+	return 0;
+}
+
+
+int testASN1()
+{
+	int ret = 0;
+	char choice[128]={0};
+	loop:
+#ifdef WIN32
+	ret = system("cls");
+#else
+	ret = system("clear");
+#endif
+	printf("ASN1 test::\n");
+	printf("01		Oid\n");
+	printf("Exit	exit\n");
+	printf("\n");
+
+	printf("please select choice::");
+	
+#ifdef  WIN32
+	ret = scanf("%s",choice);
+#else
+	ret = scanf("%s",choice);
+#endif
+	
+	if ((strcmp(choice,"EXIT") == 0) || (strcmp("QUIT",choice) == 0))
+		return(0);
+	int c = atoi(choice);
+	switch (c)
+	{
+	case 1:
+		testOID();
+		break;
+	default:
+		printf("not support the choice\n");
+		break;
+	}
+
+	printf("please enter... ...");
+	getchar();
+	getchar();
+	goto loop;
+
+	return 0;
+
+
+}
+
+
 
 
 
@@ -373,6 +455,7 @@ int main()
 	printf("06		SHA3\n");
 	printf("07		Keccak\n");
 	printf("08		SM4\n");
+	printf("09		ASN1\n");
 	printf("Exit	exit\n");
 	printf("\n");
 
@@ -412,6 +495,9 @@ int main()
 		break;
 	case 8:
 		test_sm4();
+		break;
+	case 9:
+		testASN1();
 		break;
 	default:
 		printf("not support the choice\n");

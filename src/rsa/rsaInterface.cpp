@@ -72,3 +72,121 @@ int VKDec(unsigned char *vk,int vklen,unsigned char *cryptTxt,int cryptTxtLen,un
 	return RSAVKDec(cryptTxt,cryptTxtLen,vk,vklen,0,plainTxt);
 }
 
+
+/*
+功能: 用口令加密RSA私钥明文得到私钥密文
+输入:
+	dervk: der 格式的私钥明文
+	vklen:私钥明文长度
+	passwd: 私钥保护口令
+输出:
+	vkbypasswd: 私钥密文
+返回:
+	>0 私钥密文的长度
+	<0 失败
+*/
+
+int EncryptDerVkBypassword(unsigned char *dervk,int vklen,char *passwd,char *vkbypasswd)
+{
+	int ret = 0;
+	EVP_PKEY    *pkey = NULL;
+	long 		inl=0;
+	char		buf[8192+1]={0};
+	unsigned char *const_buf = NULL;
+	BIO *pbio = NULL;
+	pkey=EVP_PKEY_new();
+	const_buf = dervk;
+	inl = vklen ;
+	if(d2i_PrivateKey(EVP_PKEY_RSA,&pkey,(const unsigned char **)&const_buf,inl) == NULL )
+	{
+		EVP_PKEY_free(pkey);
+		printf("in UnionEncryptRSAVkeyByPwd d2i_PrivateKey failed \n");
+		return -1;
+	}
+
+	pbio = BIO_new(BIO_s_mem());
+	if (pbio == NULL)
+	{
+		EVP_PKEY_free(pkey);
+		printf("in UnionEncryptRSAVkeyByPwd BIO_new(BIO_s_mem) failed!\n");
+		return -2;
+	}
+	if(!PEM_write_bio_PrivateKey(pbio,pkey,EVP_des_ede3_cbc(),
+		(unsigned char*)passwd,strlen(passwd),0,NULL)) 
+	{
+		BIO_free(pbio);
+		EVP_PKEY_free(pkey);
+		return -3;
+	}
+	ret = BIO_read(pbio,buf,sizeof(buf));
+	memcpy(vkbypasswd,buf,ret);
+
+	BIO_free(pbio);
+	pbio = NULL;
+	EVP_PKEY_free(pkey);
+	pkey = NULL;
+	return ret;
+}
+
+
+
+/*
+功能:从私钥密文获取私钥明文
+输入:
+	vkbypasswd: 私钥密文
+	vklen:私钥密文长度
+	passwd: 私钥保护口令
+输出:
+	derVK: DER格式的私钥
+返回:
+	>0 der格式私钥的长度
+	<0 失败
+*/
+
+int DecryptPEMVk2Der(unsigned char *vkbypasswd,int vklen,char *passwd,unsigned char *derVK)
+{
+	BIO *pbio = NULL;
+	int len = 0;
+	unsigned char *buf = NULL;
+	char buffer[4096]={0};
+	EVP_PKEY	*pKey = NULL;
+	int ret = 0;	
+	if ((vkbypasswd == NULL  || vklen <0 || passwd == NULL || derVK == NULL))
+	{
+		printf("in DecryptPEMVk2Der::para err .\n");
+		return -1;
+	}
+
+
+	pbio = BIO_new(BIO_s_mem());
+	if (pbio == NULL)
+	{
+		
+		printf("DecryptPEMVk2Der BIO_new(BIO_s_mem) failed!\n");
+		return -2;
+	}
+	ret = BIO_write(pbio,vkbypasswd,vklen);
+	
+	pKey = PEM_read_bio_PrivateKey(pbio,NULL,0,(unsigned char*)passwd);
+	if(pKey == NULL) {
+		printf("in DecryptPEMVk2Der::PEM_read_bio_PrivateKey failed .\n");
+		BIO_free(pbio);
+		return -3;
+	}
+
+	BIO_free(pbio);
+	pbio = NULL;
+
+	len = i2d_PrivateKey(pKey,&buf);
+	if(len<0)
+	{
+		printf("in DecryptPEMVk2Der::i2d_PrivateKey failed \n");
+		EVP_PKEY_free(pKey);
+		free(buf);
+		return -4;
+	}
+	memcpy(derVK,buf,len);
+	EVP_PKEY_free(pKey);
+	free(buf);
+	return len;
+}

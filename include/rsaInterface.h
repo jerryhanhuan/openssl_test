@@ -36,6 +36,39 @@ int VKDecPKCS1(unsigned char *vk,int vklen,unsigned char *cryptTxt,int cryptTxtL
 //私钥解密(不填充)
 int VKDec(unsigned char *vk,int vklen,unsigned char *cryptTxt,int cryptTxtLen,unsigned char *plainTxt);
 
+/*
+功能: 用口令加密RSA私钥明文得到私钥密文
+输入:
+	dervk: der 格式的私钥明文
+	vklen:私钥明文长度
+	passwd: 私钥保护口令
+输出:
+	vkbypasswd: 私钥密文
+返回:
+	>0 私钥密文的长度
+	<0 失败
+*/
+
+int EncryptDerVkBypassword(unsigned char *dervk,int vklen,char *passwd,char *vkbypasswd);
+
+
+
+/*
+功能:从私钥密文获取私钥明文
+输入:
+	vkbypasswd: 私钥密文
+	vklen:私钥密文长度
+	passwd: 私钥保护口令
+输出:
+	derVK: DER格式的私钥
+返回:
+	>0 der格式私钥的长度
+	<0 失败
+*/
+
+int DecryptPEMVk2Der(unsigned char *vkbypasswd,int vklen,char *passwd,unsigned char *derVK);
+
+
 
 
 

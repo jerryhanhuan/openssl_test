@@ -285,9 +285,6 @@
     <ClInclude Include="..\..\include\smAPI.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\asn1.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\ecc.h">
       <Filter>include</Filter>
     </ClInclude>
@@ -296,6 +293,24 @@
     </ClInclude>
     <ClInclude Include="..\..\src\hash\sha3.h">
       <Filter>src\hash</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\eccInterface.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\macro.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\rsaInterface.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\asn1\asn1.h">
+      <Filter>src\asn1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ecc\ecc.h">
+      <Filter>src\ecc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Asn1Interface.h">
+      <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -317,12 +332,6 @@
     <ClCompile Include="..\..\src\sm\smAPI.cpp">
       <Filter>src\sm</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\ecc\ecc.cpp">
-      <Filter>src\ecc</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\asn1\asn1.cpp">
-      <Filter>src\asn1</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\test\test.cpp">
       <Filter>test</Filter>
     </ClCompile>
@@ -331,6 +340,18 @@
     </ClCompile>
     <ClCompile Include="..\..\src\hash\sha3.cpp">
       <Filter>src\hash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\asn1\asn1.c">
+      <Filter>src\asn1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ecc\ecc.c">
+      <Filter>src\ecc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ecc\eccInterface.cpp">
+      <Filter>src\ecc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\asn1\Asn1Interface.cpp">
+      <Filter>src\asn1</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
