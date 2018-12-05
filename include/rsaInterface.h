@@ -54,6 +54,26 @@ int EncryptDerVkBypassword(unsigned char *dervk,int vklen,char *passwd,char *vkb
 
 
 /*
+功能: 用口令加密RSA私钥明文得到私钥密文(PKCS#1)
+输入:
+	dervk: der 格式的私钥明文
+	vklen:私钥明文长度
+	passwd: 私钥保护口令
+输出:
+	vkbypasswd: 私钥密文
+返回:
+	>0 私钥密文的长度
+	<0 失败
+reference https://www.openssl.org/docs/man1.1.0/crypto/PEM_write_bio_PrivateKey.html
+	
+	
+*/
+
+int EncryptDerVkBypasswordEx(unsigned char *dervk,int vklen,char *passwd,char *vkbypasswd);
+
+
+
+/*
 功能:从私钥密文获取私钥明文
 输入:
 	vkbypasswd: 私钥密文

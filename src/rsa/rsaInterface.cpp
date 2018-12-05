@@ -155,6 +155,87 @@ int EncryptDerVkBypassword(unsigned char *dervk,int vklen,char *passwd,char *vkb
 }
 
 
+/*
+功能: 用口令加密RSA私钥明文得到私钥密文(PKCS#1)
+输入:
+	dervk: der 格式的私钥明文
+	vklen:私钥明文长度
+	passwd: 私钥保护口令
+输出:
+	vkbypasswd: 私钥密文
+返回:
+	>0 私钥密文的长度
+	<0 失败
+reference https://www.openssl.org/docs/man1.1.0/crypto/PEM_write_bio_PrivateKey.html
+	
+	
+*/
+
+int EncryptDerVkBypasswordEx(unsigned char *dervk,int vklen,char *passwd,char *vkbypasswd)
+{
+	int ret = 0;
+	EVP_PKEY    *pkey = NULL;
+	long 		inl=0;
+	char		buf[8192+1]={0};
+	unsigned char *const_buf = NULL;
+	BIO *pbio = NULL;
+
+	init_OpenSSL();
+
+	pkey=EVP_PKEY_new();
+	const_buf = dervk;
+	inl = vklen ;
+	if(d2i_PrivateKey(EVP_PKEY_RSA,&pkey,(const unsigned char **)&const_buf,inl) == NULL )
+	{
+		EVP_PKEY_free(pkey);
+		printf("in EncryptDerVkBypasswordEx d2i_PrivateKey failed \n");
+		return -1;
+	}
+	RSA *rsakey = NULL;
+	rsakey = EVP_PKEY_get1_RSA(pkey);
+	if (!rsakey)
+	{
+		printf("in EncryptDerVkBypasswordEx::EVP_PKEY_get1_RSA failed at %s,line %d\n",__FILE__,__LINE__);
+		EVP_PKEY_free(pkey);
+		return -2;
+	}
+	
+
+	pbio = BIO_new(BIO_s_mem());
+	if (pbio == NULL)
+	{
+		EVP_PKEY_free(pkey);
+		RSA_free(rsakey);
+		printf("in UnionEncryptRSAVkeyByPwd BIO_new(BIO_s_mem) failed!\n");
+		return -2;
+	}
+	/*
+	if(!PEM_write_bio_PKCS8PrivateKey(pbio,pkey,EVP_des_ede3_cbc(),
+		passwd,strlen(passwd),0,NULL)) 
+	*/
+	/*if(!PEM_write_bio_PrivateKey(pbio,pkey,EVP_des_ede3_cbc(),
+		(unsigned char*)passwd,strlen(passwd),0,NULL)) */
+	if(!PEM_write_bio_RSAPrivateKey(pbio,rsakey,EVP_des_ede3_cbc(),
+		(unsigned char*)passwd,strlen(passwd),0,NULL))
+	{
+		BIO_free(pbio);
+		EVP_PKEY_free(pkey);
+		RSA_free(rsakey);
+		printf("in ncryptDerVkBypasswordEx::PEM_write_bio_RSAPrivateKey failed\n");
+		return -3;
+	}
+	ret = BIO_read(pbio,buf,sizeof(buf));
+	memcpy(vkbypasswd,buf,ret);
+
+	BIO_free(pbio);
+	pbio = NULL;
+	EVP_PKEY_free(pkey);
+	RSA_free(rsakey);
+	pkey = NULL;
+	return ret;
+}
+
+
 
 /*
 功能:从私钥密文获取私钥明文
