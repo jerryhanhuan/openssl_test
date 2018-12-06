@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Asn1Interface.h" />
+    <ClInclude Include="..\..\include\desInterface.h" />
     <ClInclude Include="..\..\include\ecc.h" />
     <ClInclude Include="..\..\include\eccInterface.h" />
     <ClInclude Include="..\..\include\hashInterface.h" />
@@ -110,6 +111,7 @@
     <ClInclude Include="..\..\src\asn1\asn1.h" />
     <ClInclude Include="..\..\src\ecc\ecc.h" />
     <ClInclude Include="..\..\src\hash\sha3.h" />
+    <ClInclude Include="..\..\src\rsa\rsa.h" />
     <ClInclude Include="..\..\src\sm\sm3.h" />
     <ClInclude Include="..\..\src\sm\sm4.h" />
   </ItemGroup>
@@ -117,10 +119,13 @@
     <ClCompile Include="..\..\include\openssl\applink.c" />
     <ClCompile Include="..\..\src\asn1\asn1.c" />
     <ClCompile Include="..\..\src\asn1\Asn1Interface.cpp" />
+    <ClCompile Include="..\..\src\des\desInterface.cpp" />
     <ClCompile Include="..\..\src\ecc\ecc.c" />
     <ClCompile Include="..\..\src\ecc\eccInterface.cpp" />
     <ClCompile Include="..\..\src\hash\hashInterface.cpp" />
     <ClCompile Include="..\..\src\hash\sha3.cpp" />
+    <ClCompile Include="..\..\src\rsa\rsa.c" />
+    <ClCompile Include="..\..\src\rsa\rsaInterface.cpp" />
     <ClCompile Include="..\..\src\sm\sm3.c" />
     <ClCompile Include="..\..\src\sm\sm4.c" />
     <ClCompile Include="..\..\src\sm\smAPI.cpp" />
@@ -132,6 +137,7 @@
     <None Include="..\..\src\asn1\makefile" />
     <None Include="..\..\src\ecc\makefile" />
     <None Include="..\..\src\hash\makefile" />
+    <None Include="..\..\src\rsa\makefile" />
     <None Include="..\..\src\sm\makefile" />
     <None Include="..\..\test\makefile" />
   </ItemGroup>

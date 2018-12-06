@@ -31,6 +31,9 @@
     <Filter Include="src\asn1">
       <UniqueIdentifier>{eafa8f24-3983-4e33-88c7-e3f6667e6158}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\des">
+      <UniqueIdentifier>{67679e5c-c6b9-4f5a-8aaf-8c7d12d29878}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\openssl\aes.h">
@@ -312,6 +315,12 @@
     <ClInclude Include="..\..\include\Asn1Interface.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\desInterface.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\rsa\rsa.h">
+      <Filter>src\rsa</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\include\openssl\applink.c">
@@ -353,6 +362,15 @@
     <ClCompile Include="..\..\src\asn1\Asn1Interface.cpp">
       <Filter>src\asn1</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\des\desInterface.cpp">
+      <Filter>src\des</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rsa\rsa.c">
+      <Filter>src\rsa</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rsa\rsaInterface.cpp">
+      <Filter>src\rsa</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\src\ecc\makefile">
@@ -369,6 +387,9 @@
     </None>
     <None Include="..\..\src\sm\makefile">
       <Filter>src\sm</Filter>
+    </None>
+    <None Include="..\..\src\rsa\makefile">
+      <Filter>src\rsa</Filter>
     </None>
   </ItemGroup>
 </Project>

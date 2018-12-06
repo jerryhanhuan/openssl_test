@@ -1,4 +1,4 @@
-#include <unistd.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -22,9 +22,10 @@ int TDESEncryptWithECB(unsigned char *key, int keylen,unsigned char *data,int da
     DES_set_key_unchecked((const_DES_cblock*)lk, &ks1);  
     DES_set_key_unchecked((const_DES_cblock*)mk, &ks2);  
     DES_set_key_unchecked((const_DES_cblock*)rk, &ks3);  
-    for(i=0;i<=datalen;i+=8)
+	
+    for(i=0;i<datalen;i+=8)
     {
-         DES_ecb3_encrypt((const_DES_cblock*)data+i, (DES_cblock *)outdata+i, &ks1, &ks2, &ks3, DES_ENCRYPT);
+         DES_ecb3_encrypt((const_DES_cblock*)(data+i), (DES_cblock *)(outdata+i), &ks1, &ks2, &ks3, DES_ENCRYPT);
     }
     return datalen;
 }
@@ -32,7 +33,7 @@ int TDESEncryptWithECB(unsigned char *key, int keylen,unsigned char *data,int da
 
 int TDESDecryptWithECB(unsigned char *key, int keylen,unsigned char *data,int datalen,unsigned char *outdata)
 {
- int ret = 0;
+	int ret = 0;
     DES_key_schedule ks1, ks2, ks3;
     unsigned char lk[8]={0};
     unsigned char mk[8]={0};
@@ -44,9 +45,9 @@ int TDESDecryptWithECB(unsigned char *key, int keylen,unsigned char *data,int da
     DES_set_key_unchecked((const_DES_cblock*)lk, &ks1);  
     DES_set_key_unchecked((const_DES_cblock*)mk, &ks2);  
     DES_set_key_unchecked((const_DES_cblock*)rk, &ks3);  
-    for(i=0;i<=datalen;i+=8)
+    for(i=0;i<datalen;i+=8)
     {
-         DES_ecb3_encrypt((const_DES_cblock*)data+i, (DES_cblock *)outdata+i, &ks1, &ks2, &ks3, DES_DECRYPT);
+         DES_ecb3_encrypt((const_DES_cblock*)(data+i), (DES_cblock *)(outdata+i), &ks1, &ks2, &ks3, DES_DECRYPT);
     }
     return datalen;
 }

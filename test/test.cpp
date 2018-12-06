@@ -476,9 +476,9 @@ int test_3DES()
 	char buf[8192]={0};
 	int ret = 0;
 	char *ptr = NULL;
-	ptr = Input("请输入密钥(H)::");
+	ptr = Input("please input key(H)::");
 	int keylen = aschex_to_bcdhex(ptr,strlen(ptr),(char*)key);
-	ptr = Input("请输入数据(H)::");
+	ptr = Input("please input data(H)::");
 	datalen = aschex_to_bcdhex(ptr,strlen(ptr),(char*)data);
 	if((ret = TDESEncryptWithECB(key,keylen,data,datalen,out))<0)
 	{
