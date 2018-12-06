@@ -10,6 +10,7 @@ arlib = $(OBJDIR)libhash.a\
 		$(OBJDIR)libsma.a\
                 $(OBJDIR)libasn1.a\
                 $(OBJDIR)librsa.a\
+				$(OBJDIR)libdes.a\
                 $(OBJDIR)libutil.a
 
 LIB =  $(arlib) -L $(LIBDIR) -lcrypto
