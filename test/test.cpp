@@ -15,6 +15,7 @@
 #include "Asn1Interface.h"
 #include "rsaInterface.h"
 #include "Asn1Interface.h"
+#include "desInterface.h"
 
 
 char	pgUnionInputStr[8192+1];
@@ -465,7 +466,39 @@ int test_RSA_pwd()
 	return 0;
 }
 
+int test_3DES()
+{
+	unsigned char key[24]={0};
+	char keyHex[128]={0};
+	unsigned char data[8192]={0};
+	int datalen = 0;
+	unsigned char out[8192]={0};
+	char buf[8192]={0};
+	int ret = 0;
+	char *ptr = NULL;
+	ptr = Input("请输入密钥(H)::");
+	int keylen = aschex_to_bcdhex(ptr,strlen(ptr),(char*)key);
+	ptr = Input("请输入数据(H)::");
+	datalen = aschex_to_bcdhex(ptr,strlen(ptr),(char*)data);
+	if((ret = TDESEncryptWithECB(key,keylen,data,datalen,out))<0)
+	{
+		printf("TDESEncryptWithECB failed\n");
+		return ret;
+	}
+	bcdhex_to_aschex((char*)out,ret,buf);
+	printf("%s\n",buf);
 
+	memset(buf,0,sizeof(buf));
+	unsigned char cleardata[8192]={0};
+	if((ret = TDESDecryptWithECB(key,keylen,out,ret,cleardata))<0)
+	{
+		printf("TDESDecryptWithECB failed\n");
+		return ret;
+	}
+	bcdhex_to_aschex((char*)cleardata,ret,buf);
+	printf("%s\n",buf);
+	return 0;
+}
 
 
 
@@ -493,6 +526,7 @@ int main()
 	printf("08		SM4\n");
 	printf("09		ASN1\n");
 	printf("10		RSA2pemByPasswd\n");
+	printf("11		3DES\n");
 	printf("Exit	exit\n");
 	printf("\n");
 
@@ -538,6 +572,9 @@ int main()
 		break;
 	case 10:
 		test_RSA_pwd();
+		break;
+	case 11:
+		test_3DES();
 		break;
 	default:
 		printf("not support the choice\n");
