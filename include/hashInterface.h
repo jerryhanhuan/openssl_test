@@ -100,7 +100,7 @@ int keccak(int hashID,unsigned char *in,int ilen,unsigned char *out);
 
 
 
-
+int MerkleHash2();
 
 
 

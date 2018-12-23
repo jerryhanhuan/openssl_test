@@ -18,6 +18,7 @@
 #include "desInterface.h"
 
 
+
 char	pgUnionInputStr[8192+1];
 int IsQuit(char *p)
 {
@@ -501,7 +502,7 @@ int test_3DES()
 }
 
 
-
+#if 1
 int main()
 {
 	int ret = 0;
@@ -527,6 +528,7 @@ int main()
 	printf("09		ASN1\n");
 	printf("10		RSA2pemByPasswd\n");
 	printf("11		3DES\n");
+	printf("12		MerkleHash2\n");
 	printf("Exit	exit\n");
 	printf("\n");
 
@@ -576,6 +578,9 @@ int main()
 	case 11:
 		test_3DES();
 		break;
+	case 12:
+		MerkleHash2();
+		break;
 	default:
 		printf("not support the choice\n");
 		break;
@@ -589,4 +594,4 @@ int main()
 	return 0;
 }
 
-
+#endif

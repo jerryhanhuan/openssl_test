@@ -11,7 +11,8 @@
 #include "openssl_init.h"
 #include "hashInterface.h"
 #include "sha3.h"
-
+#include "merkle_tree.h"
+#include "str.h"
 
 /*
 功能: 计算hash
@@ -250,3 +251,29 @@ int keccak(int hashID,unsigned char *in,int ilen,unsigned char *out)
 }
 
 
+
+int MerkleHash2()
+{
+
+	char *node1 = "FB0E438520806E2401893B0546EAA52EDE7F6E577F9319EF9EEC41AA334CCA7C";
+	char *node2 = "10A8943CFE4C83D8D85EC23D381EF23EEE67D455D5DAE4CA472D9509BB17F245";
+	char *node3 = "DE5A6F78116ECA62D7FC5CE159D23AE6B889B365A1739AD2CF36F925A140D0CC";
+	char *node4 = "30CA65D5DA355227C97FF836C9C6719AF9D3835FC6BC72BDDC50EEECC1BB2B25";
+	char *node5 = "53F8E3DE79EA16B1BC180A2A8DC49B23ADAF64B2C270FFA56F1C059E99CA4FA9";
+	unsigned char hash[100][32]={0};
+
+	aschex_to_bcdhex(node1,strlen(node1),(char*)hash[0]);
+	aschex_to_bcdhex(node2,strlen(node2),(char*)hash[1]);
+	aschex_to_bcdhex(node3,strlen(node3),(char*)hash[2]);
+	aschex_to_bcdhex(node4,strlen(node4),(char*)hash[3]);
+	aschex_to_bcdhex(node5,strlen(node5),(char*)hash[4]);
+
+	unsigned char result[32]={0};
+	MerkleHash(hash,5,result);
+
+	char resultHex[65]={0};
+	bcdhex_to_aschex((char*)result,32,resultHex);
+	printf("resultHex::[%s]\n",resultHex);
+	return 0;
+
+}

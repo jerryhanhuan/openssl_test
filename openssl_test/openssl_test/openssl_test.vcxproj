@@ -110,6 +110,7 @@
     <ClInclude Include="..\..\include\str.h" />
     <ClInclude Include="..\..\src\asn1\asn1.h" />
     <ClInclude Include="..\..\src\ecc\ecc.h" />
+    <ClInclude Include="..\..\src\hash\merkle_tree.h" />
     <ClInclude Include="..\..\src\hash\sha3.h" />
     <ClInclude Include="..\..\src\rsa\rsa.h" />
     <ClInclude Include="..\..\src\sm\sm3.h" />
@@ -123,6 +124,7 @@
     <ClCompile Include="..\..\src\ecc\ecc.c" />
     <ClCompile Include="..\..\src\ecc\eccInterface.cpp" />
     <ClCompile Include="..\..\src\hash\hashInterface.cpp" />
+    <ClCompile Include="..\..\src\hash\merkle_tree.cpp" />
     <ClCompile Include="..\..\src\hash\sha3.cpp" />
     <ClCompile Include="..\..\src\rsa\rsa.c" />
     <ClCompile Include="..\..\src\rsa\rsaInterface.cpp" />

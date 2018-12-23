@@ -321,6 +321,9 @@
     <ClInclude Include="..\..\src\rsa\rsa.h">
       <Filter>src\rsa</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\hash\merkle_tree.h">
+      <Filter>src\hash</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\include\openssl\applink.c">
@@ -370,6 +373,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\rsa\rsaInterface.cpp">
       <Filter>src\rsa</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hash\merkle_tree.cpp">
+      <Filter>src\hash</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
